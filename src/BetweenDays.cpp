@@ -30,5 +30,37 @@ struct node{
 
 
 int between_days(struct node *date1head, struct node *date2head){
-	return -1;
+	int days=0,d1, m1, y1, d2, m2, y2, i, dim[12] = {31,29,31,30,31,30,31,31,30,31,30,31};
+	if (date1head == NULL || date2head == NULL)
+		return -1;
+	d1 = date1head->data * 10+date1head->next->data;
+	date1head = date1head->next->next;
+	d2 = date2head->data * 10+date2head->next->data;
+	date2head = date2head->next->next;
+	m1 =date1head->data * 10 + date1head->next->data;
+	date1head = date1head->next->next;
+	m2 = date2head->data * 10 + date2head->next->data;
+	date2head = date2head->next->next;
+	y1 = date1head->data * 1000 + (date1head->next->data*100);
+	date1head = date1head->next->next;
+	y1 = y1 + date1head->data * 10 + (date1head->next->data);
+	y2 = date2head->data * 1000 + (date2head->next->data * 100);
+	date2head = date2head->next->next;
+	y2 = y2 + date2head->data * 10 + (date2head->next->data);
+	if (d1 <= 0 || d1 > 31 || d2 <= 0 || d2 > 31)
+		return -1;
+	if (m1 <= 0 || m1 > 12 || m2 <= 0 || m2 > 12)
+		return -1;
+	if (y1 == y2&&m1 == m2 && (d1 == d2 || d2 == d1 + 1 || d1 == d2 + 1))
+		return -1;
+	if (y1 == y2)
+	{
+		if (m1 == m2)
+			days = d2 - d1 - 1;
+		else
+		{
+			days = dim[m1 - 1] - d1 +d2 - 1;
+		}
+	}
+	return days;
 }

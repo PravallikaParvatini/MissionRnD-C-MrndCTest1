@@ -30,8 +30,49 @@ Difficulty : Medium
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <conio.h>
 
 int * find_sequences(int *arr, int len){
 	//Return final array which has 6indexes [AP1_S,AP1_E,AP2_S,AP2_E,GP1_S,GP2_E]
-	return NULL;
+	int i = 0, b[6], diff, mul, k = 0, l = 0;
+	for (i = 0; i < len; i++)
+	{
+		if (arr[i + 1] - arr[i] == arr[i + 2] - arr[i + 1])
+		{
+			diff = arr[i + 1] - arr[i];
+			b[k] = i;
+			k++;
+			i = i + 2;
+			while (arr[i] == arr[i - 1] + diff&&i < len)
+				i++;
+			b[k] = i;
+			k++;
+		}
+	}
+	for (l=i; l < len; l++)
+	{
+		if (arr[l + 1] - arr[l] == arr[l + 2] - arr[l + 1])
+		{
+			b[k] = l;
+			k++;
+			l = l + 3;
+			diff = arr[l + 1] - arr[l];
+			while (arr[l] == arr[l - 1] + diff&&l < len)
+				l++;
+			b[k] = l;
+			k++;
+		}
+	}
+	for (i = 0; i < len; i++)
+	{
+		if (arr[i + 1] / arr[i] == arr[i + 2] / arr[i + 1])
+		{
+			b[4] = i;
+			mul = arr[i + 1] / arr[i];
+			while (arr[i + 1] == arr[i] * mul)
+				i++;
+			b[5] = i;
+		}
+	}
+	return b;
 }
