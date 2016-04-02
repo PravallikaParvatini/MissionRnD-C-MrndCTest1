@@ -38,10 +38,6 @@ int merge_circularlists(struct node **head1, struct node **head2){
 	struct node *temp1, *temp2, *temp3;
 	if (*head1 == NULL||*head2 == NULL)
 		return -1;
-/*	if (head1 == NULL&&head2 != NULL)
-		return head2;
-	if (head1 != NULL&&head2 == NULL)
-		return head1;*/
 	if ((*head1)->data < (*head2)->data)
 		temp1 = *head1;
 	else
@@ -55,7 +51,7 @@ int merge_circularlists(struct node **head1, struct node **head2){
 	while (temp1->next!=*head1&&temp2->next!=*head2)
 	{
 		count++;
-		while ((temp1)->data <= (temp2)->data&&temp1!=*head1)
+		while ((temp1)->data >= (temp2)->data&&temp1!=*head1)
 		{
 			if ((temp1)->next->data >=(temp2)->data)
 			{

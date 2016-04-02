@@ -62,5 +62,10 @@ int between_days(struct node *date1head, struct node *date2head){
 			days = dim[m1 - 1] - d1 +d2 - 1;
 		}
 	}
+	else
+	{
+		days = y2 - y1 * 365;
+		days = days - (m1 - m2) * 30;
+	}
 	return days;
 }
